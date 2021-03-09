@@ -26,6 +26,7 @@ public class SC_FPSController : MonoBehaviour
     void Start()
     {
         characterController = GetComponent<CharacterController>();
+        characterController.height = 2.0f;
 
         // Lock cursor
         Cursor.lockState = CursorLockMode.Locked;
@@ -40,6 +41,17 @@ public class SC_FPSController : MonoBehaviour
         // Press Left Shift to run
         bool isRunning = Input.GetKey(KeyCode.LeftShift);
         bool isCrouching = Input.GetKey(KeyCode.LeftControl);
+
+        if (isCrouching == true)
+        {
+            characterController.height = 0.85f;
+        }
+
+        else if (isCrouching == false)
+        {
+            characterController.height = 2.0f;
+        }
+
         float curSpeedX = canMove ? (isCrouching ? crouchSpeed : isRunning ? runningSpeed : walkingSpeed) * Input.GetAxis("Vertical") : 0;
         float curSpeedY = canMove ? (isCrouching ? crouchSpeed : isRunning ? runningSpeed : walkingSpeed) * Input.GetAxis("Horizontal") : 0;
         float movementDirectionY = moveDirection.y;

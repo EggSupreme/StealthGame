@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public GameObject arr;
+    public GameObject rockPrefab;
     public GameObject hand = null;
 
     const float diagonalPenalty = 0.7f;
@@ -19,11 +21,24 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Q)) // rotate hand downwards
         {
-            hand.transform.Rotate(new Vector3(5 * Time.deltaTime, 0, 0));
+            hand.transform.Rotate(new Vector3(15 * Time.deltaTime, 0, 0));
         }
         else if (Input.GetKey(KeyCode.E)) // rotate hand upwards
         {
-            hand.transform.Rotate(new Vector3(-5 * Time.deltaTime, 0, 0));
+            hand.transform.Rotate(new Vector3(-15 * Time.deltaTime, 0, 0));
+        }
+
+        if (Input.GetMouseButtonDown(0)) // throw rock
+        {
+            GameObject rock = Instantiate(rockPrefab);
+            rock.transform.parent = transform;
+            rock.transform.localPosition = new Vector3(0,1.5f,0);
+            rock.GetComponent<Rigidbody>().MoveRotation(Quaternion.Euler(-45, 0, 0));
+            rock.GetComponent<Rigidbody>().AddRelativeForce(0, 0, 1000);
+        }
+        if (Input.GetMouseButtonDown(1)) // proj
+        {
+            
         }
 
         float h_axis = Input.GetAxis("Horizontal");

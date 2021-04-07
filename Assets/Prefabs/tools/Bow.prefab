@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 1923316617861037954}
   - component: {fileID: 1923316617861037955}
   - component: {fileID: 1923316617861037956}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bottom
-  m_TagString: Untagged
+  m_TagString: ProjectileIgnore
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -105,9 +105,9 @@ GameObject:
   - component: {fileID: 1923316618665468910}
   - component: {fileID: 1923316618665468911}
   - component: {fileID: 1923316618665468880}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Top
-  m_TagString: Untagged
+  m_TagString: ProjectileIgnore
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -196,7 +196,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1923316618707035315}
   - component: {fileID: 1923316618707035314}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -248,9 +248,9 @@ GameObject:
   - component: {fileID: 1923316618962743504}
   - component: {fileID: 1923316618962743505}
   - component: {fileID: 1923316618962743506}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mid
-  m_TagString: Untagged
+  m_TagString: ProjectileIgnore
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -341,9 +341,9 @@ GameObject:
   - component: {fileID: 1923316619464447554}
   - component: {fileID: 1923316619464447555}
   - component: {fileID: 1923316619464447556}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: String
-  m_TagString: Untagged
+  m_TagString: ProjectileIgnore
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

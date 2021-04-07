@@ -83,9 +83,8 @@ class Bow : ToolWithProjectile
     public override void OnLeftClickReleased()
     {
         currentProjectile.transform.parent = null;
-        currentProjectile.GetComponent<ProjectilePhysics>().Launch(Mathf.Clamp(pullTime * 5, 1.5f, 50.0f));
+        currentProjectile.GetComponent<ProjectilePhysics>().Launch(Mathf.Clamp(pullTime * 5, 1.5f, 50.0f), 1);
         currentProjectile = null;
-        Debug.Log(pullTime);
 
         instancedObject.GetComponent<BowController>().bowString.transform.Translate(0, 0, 0.05f);
     }
@@ -99,7 +98,6 @@ class BlowPipe : ToolWithProjectile
     {
         currentProjectile = Object.Instantiate(projectilePrefab, instancedObject.transform.position, instancedObject.transform.rotation);
         currentProjectile.transform.parent = instancedObject.transform;
-
     }
     public override void WhileLeftClickHeld()
     {
@@ -108,13 +106,12 @@ class BlowPipe : ToolWithProjectile
     public override void OnLeftClickReleased()
     {
         currentProjectile.transform.parent = null;
-        currentProjectile.GetComponent<ProjectilePhysics>().Launch(Mathf.Clamp(5, 1.5f, 50.0f));
+        currentProjectile.GetComponent<ProjectilePhysics>().Launch(40.0f, 0.5f);
         currentProjectile = null;
-
     }
 }
 
-public class PlayerAbilities : MonoBehaviour
+public class Tools_Abilities : MonoBehaviour
 {
     const int toolCount = 5;
 
@@ -129,8 +126,7 @@ public class PlayerAbilities : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("abilities start");
-        SwapToTool(2);
+        SwapToTool(0);
     }
 
     // Update is called once per frame

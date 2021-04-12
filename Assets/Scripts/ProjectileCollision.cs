@@ -1,49 +1,44 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ProjectileCollision : MonoBehaviour
 {
-    public ProjectilePhysics mainObject;
+    public GameObject visualObject;
 
-    // Start is called before the first frame update
-    void Start()
+    ProjectilePhysics physicsComponent;
+
+    bool beenAHit;
+    bool active = false;
+
+    public void MakeActive()
     {
-        
+        physicsComponent = GetComponent<ProjectilePhysics>();
+        active = true;
     }
 
-    // Update is called once per frame
+    const float timestep = 0.0003f;
     void Update()
     {
-        
-    }
-
-    public bool PerformChecks(float _currentAge, float _deltaTime, int _checksToPerform)
-    {
-        transform.position = mainObject.PositionAtAge(_currentAge);
-        return false;
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log("collision with " + other.gameObject.name);
-        if (!other.gameObject.CompareTag("ProjectileIgnore"))
+        if (!beenAHit && active)
         {
-            //mainObject.transform.position = other..GetContact(0).point;
-            Destroy(mainObject);
-            Debug.Log("collision");
-        }
-    }
+            float checkAge = physicsComponent.GetAge() - Time.deltaTime;
+            while (checkAge < physicsComponent.GetAge())
+            {
+                Vector3 checkPos = physicsComponent.PositionAtAge(checkAge);
+                Quaternion checkRot = physicsComponent.RotationAtAge(checkAge);
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log("collision with " + collision.gameObject.name);
-        if (!collision.gameObject.CompareTag("ProjectileIgnore"))
-        {
-            mainObject.transform.position = collision.GetContact(0).point;
-            Destroy(mainObject);
-            Debug.Log("collision");
+                beenAHit = Physics.CheckBox(checkPos, visualObject.transform.localScale * 0.5f, checkRot);
+
+                if (beenAHit)
+                {
+                    transform.position = checkPos;
+
+                    Destroy(physicsComponent);
+                    Destroy(this);
+                    break;
+                }
+
+                checkAge += timestep;
+            }
         }
-        
     }
 }

@@ -5,7 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Projectile
-  - ProjectileIgnore
+  - PlayerArrow
+  - PlayerBody
+  - AmmoStation
   layers:
   - Default
   - TransparentFX
@@ -17,7 +19,7 @@ TagManager:
   - 
   - ProjectileIgnore
   - 
-  - 
+  - PlayerInteractable
   - 
   - 
   - 

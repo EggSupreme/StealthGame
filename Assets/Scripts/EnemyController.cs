@@ -7,6 +7,7 @@ public enum Status
 {
     navigating,
     waiting,
+    sleeping,
     combat
 }
 
@@ -28,6 +29,8 @@ public class EnemyController : MonoBehaviour
 
     // combat
     GameObject combatTarget;
+    const float maxHealth = 10.0f;
+    float health = maxHealth;
 
     void Start()
     {
@@ -37,8 +40,6 @@ public class EnemyController : MonoBehaviour
 
     void Update()
     {
-        Debug.DrawLine(transform.position, pathPoints[goingTo], new Color(1, 0, 1));
-        
         switch (currentStatus)
         {
             case Status.navigating:
@@ -66,13 +67,30 @@ public class EnemyController : MonoBehaviour
                 
                 break;
 
+            case Status.sleeping:
+
+                break;
+
             case Status.combat:
 
                 break;
         }        
     }
 
-    
+    public float Damage(float _amount)
+    {
+        if (_amount == -1) { _amount = maxHealth + 1; }
+
+        health -= _amount;
+
+        if (health <= 0.0f)
+        {
+            Debug.Log("Enemy down!");
+            Destroy(gameObject);
+        }
+
+        return _amount;
+    }
 
     bool WithinRange(float _a, float _x, float _b)
     {

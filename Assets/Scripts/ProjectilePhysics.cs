@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class ProjectilePhysics : MonoBehaviour
 {
@@ -12,8 +13,8 @@ public class ProjectilePhysics : MonoBehaviour
     bool active = false;
     float age = 0.0f;
 
-    Vector3 worldAcceleration = new Vector3(0, -19.6f, 0);
-    Vector3 localAcceleration = new Vector3(0, 0, -0.005f);
+    static Vector3 worldAcceleration = new Vector3(0, -19.6f, 0);
+    static Vector3 localAcceleration = new Vector3(0, 0, -0.005f);
 
 
     public float GetAge() { return age; }
@@ -75,5 +76,62 @@ public class ProjectilePhysics : MonoBehaviour
         Vector3 dir = (currentPos - previousPos).normalized;
 
         return Quaternion.LookRotation(dir) * Quaternion.Euler(90, 0, 0);
+    }
+
+
+    public static Vector3 PosAtAge(float _age, Vector3 _initialWorldPosition, Vector3 _initialLocalVelocity, Transform t)
+    {
+        if (_age <= 0) { return _initialWorldPosition; }
+
+        Vector3 newLocation = _initialWorldPosition;
+
+        Vector3 localDisplacement = _initialLocalVelocity * _age + 0.5f * localAcceleration * (_age * _age);
+        Vector3 worldDisplacement = new Vector3(0, 0, 0) * _age + 0.5f * worldAcceleration * (_age * _age);
+
+        localDisplacement = t.localToWorldMatrix.MultiplyVector(localDisplacement);
+
+        newLocation += localDisplacement + worldDisplacement;
+        return newLocation;
+    }
+
+    public static Vector3[] Points(float _interval, float _maxPoints, float _maxAge, Vector3 _initialWorldPosition, Vector3 _initialLocalVelocity, Transform t)
+    {
+        List<Vector3> points = new List<Vector3> { };
+        for (float a = 0.0f; a < _maxAge; a += _interval)
+        {
+            if (points.Count < _maxPoints)
+            {
+                points.Add(PosAtAge(a, _initialWorldPosition, _initialLocalVelocity, t));
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        return points.ToArray();
+    }
+
+    public static Vector3 PositionWhenDisplacementReached(float _desiredDisplacement, Vector3 _initialWorldPosition, Vector3 _initialLocalVelocity, Transform t)
+    {
+        Vector3 newLocation = _initialWorldPosition;
+        Vector3 displacement = Vector3.zero;
+        float localAge = 0.0f;
+        while (_desiredDisplacement > displacement.z)
+        {
+            localAge += 0.003f;
+
+            Vector3 localDisplacement = _initialLocalVelocity * localAge + 0.5f * localAcceleration * (localAge * localAge);
+            Vector3 worldDisplacement = new Vector3(0, 0, 0) * localAge + 0.5f * worldAcceleration * (localAge * localAge);
+
+            localDisplacement = t.localToWorldMatrix.MultiplyVector(localDisplacement);
+
+            Vector3 iterationDisplacement = localDisplacement + worldDisplacement;
+            newLocation += iterationDisplacement;
+
+            displacement += iterationDisplacement;
+        }
+
+        return newLocation;
     }
 }

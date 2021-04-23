@@ -35,6 +35,8 @@ public class PlayerInteraction : MonoBehaviour
             else
             {
                 currentInteractables[i].PopupTransform().rotation = Camera.main.transform.rotation;
+                //if (currentInteractables[i].GetInteractableType() == PlayerInteractableType.enemy && GetComponentInParent<Tools_Abilities>().CurrentToolID != 1)
+                //{ currentInteractables[i].ShowPopup(false); currentInteractables.RemoveAt(i); }
             }
         }
 
@@ -57,10 +59,6 @@ public class PlayerInteraction : MonoBehaviour
 
                 case PlayerInteractableType.ammoStation:
                     GetComponentInParent<Tools_Abilities>().CollectAmmo(AmmoStation.TakeAll());
-                    break;
-
-                case PlayerInteractableType.enemy:
-                    chosenInteractable.GetComponentInParent<EnemyController>().Damage(-1);
                     break;
             }
         }

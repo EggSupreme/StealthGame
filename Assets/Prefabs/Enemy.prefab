@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 553987064847130063}
   m_Layer: 0
   m_Name: RestHand
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 2151005581674905297}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -133,9 +133,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4457638045386665628}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: TargetHand
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -167,7 +167,7 @@ GameObject:
   - component: {fileID: 6693964412494932818}
   m_Layer: 0
   m_Name: Face
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -242,9 +242,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4905846302302188439}
-  m_Layer: 0
+  - component: {fileID: 8914999949371941188}
+  - component: {fileID: 5612261594164575510}
+  m_Layer: 9
   m_Name: Facing
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -264,6 +266,32 @@ Transform:
   m_Father: {fileID: 7542474732025810562}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &8914999949371941188
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3529017014962639676}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.5, y: 2, z: 5}
+  m_Center: {x: 0, y: -0.5, z: 2.8}
+--- !u!65 &5612261594164575510
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3529017014962639676}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5, y: 2, z: 2.5}
+  m_Center: {x: 0, y: -0.5, z: 3.5}
 --- !u!1 &8998956203533852813
 GameObject:
   m_ObjectHideFlags: 0
@@ -276,10 +304,9 @@ GameObject:
   - component: {fileID: 8761780405026479993}
   - component: {fileID: 1048643617281526778}
   - component: {fileID: 1082776230779289637}
-  - component: {fileID: 343899416750422272}
   m_Layer: 0
   m_Name: Beanman
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -359,19 +386,3 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &343899416750422272
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8998956203533852813}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea6ba3a8265fa4d4d8ee745061f0e03d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  popupParent: {fileID: 1425752616628557894}
-  popupWorldOffset: {x: 0, y: 1, z: 0}
-  _popupPrefab: {fileID: 0}
-  type: 3

@@ -72,7 +72,7 @@ public class EnemyController : MonoBehaviour
                 break;
 
             case Status.combat:
-
+                agent.isStopped = true;
                 break;
         }        
     }
@@ -111,5 +111,15 @@ public class EnemyController : MonoBehaviour
         }
 
         return proposedNext;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            Debug.Log("Sighted " + other.name);
+            currentStatus = Status.combat;
+        }
+        
     }
 }

@@ -30,7 +30,7 @@ public class ProjectileCollision : MonoBehaviour
                 Vector3 checkPos = physicsComponent.PositionAtAge(checkAge);
                 Quaternion checkRot = physicsComponent.RotationAtAge(checkAge);
 
-                Collider[] hits = Physics.OverlapBox(checkPos, visualObject.transform.localScale * 0.5f, checkRot, ~(1 << 8), QueryTriggerInteraction.Collide);
+                Collider[] hits = Physics.OverlapBox(checkPos, visualObject.transform.localScale * 0.5f, checkRot, ~((1 << 8) | (1 << 9)), QueryTriggerInteraction.Collide);
 
                 if (hits.Length > 0)
                 {
@@ -47,16 +47,24 @@ public class ProjectileCollision : MonoBehaviour
                             transform.parent = hits[c].transform;
                         }
                         
+                        switch (ammoType)
+                        {
+                            case AmmoType.arrow:
+                                if (hits[c].CompareTag("Enemy"))
+                                { Debug.Log("Arrow has hit enemy"); }
+                                break;
+
+                            case AmmoType.sleepDart:
+                                decayAge = decayTime + 1;
+                                if (hits[c].CompareTag("Enemy"))
+                                { Debug.Log("Dart has hit enemy"); }
+                                break;
+                        }
                     }
 
                     transform.position = checkPos;
                     Destroy(physicsComponent);
                     visualObject.GetComponent<BoxCollider>().enabled = true;
-
-                    if (ammoType == AmmoType.sleepDart)
-                    {
-                        decayAge = decayTime + 1;
-                    }
                     break;
                 }
 

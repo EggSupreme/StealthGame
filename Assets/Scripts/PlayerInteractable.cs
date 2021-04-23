@@ -8,7 +8,6 @@ public enum PlayerInteractableType
     arrow,
     rock,
     ammoStation,
-    enemy
 }
 
 class InteractableData
@@ -25,7 +24,7 @@ class InteractableData
 
 public class PlayerInteractable : MonoBehaviour
 {
-    static InteractableData[] dataArray = { new InteractableData("Pick up", new Vector3(0.0f, 0.2f, 0.0f)), null, new InteractableData("Search", new Vector3(0.0f, 0.8f, 0.0f)), new InteractableData("Stab", new Vector3(0.0f, 0.0f, 0.0f)) };
+    static InteractableData[] dataArray = { new InteractableData("Collect", new Vector3(0.0f, 0.2f, 0.0f)), null, new InteractableData("Search", new Vector3(0.0f, 0.8f, 0.0f)) };
     InteractableData MyTypeData() { return dataArray[(int)type]; }
 
     public GameObject popupParent = null;

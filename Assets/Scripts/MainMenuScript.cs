@@ -18,7 +18,7 @@ public class MainMenuScript : MonoBehaviour
     }
 
    public void startButton()
-    { SceneManager.LoadScene("George_TestScene"); }
+    { AudioPlayer.PlayCrickets(true); SceneManager.LoadScene("Joseph_TestScene"); }
 
     public void menuButton()
     { SceneManager.LoadScene("MainMenuScene"); }

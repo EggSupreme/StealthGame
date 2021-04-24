@@ -73,6 +73,9 @@ class ToolWithProjectile : Tool
 
     public void UpdateAmmo(int _count) { ammoCount += _count; Tools_Abilities.GetToolVisual(id).GetComponentInChildren<Text>().text = ammoCount.ToString(); }
 
+    public int GetAmmoCount() { return ammoCount; }
+    public void SetAmmoCount(int _count) { ammoCount = 0; UpdateAmmo(_count); }
+
     public override void BringOut(GameObject _hand, GameObject _prefab, GameObject _projectilePrefab = null)
     {
         instancedObject = Object.Instantiate(_prefab, _hand.transform);
@@ -231,6 +234,24 @@ public class Tools_Abilities : MonoBehaviour
     Tool[] tools = new Tool[toolCount] { new Bow(), new Dagger(), new BlowPipe(), null, null };
 
     public static GameObject GetToolVisual(int _id) { return staticToolVisuals[_id]; }
+
+
+    public int[] GetAmmoData()
+    {
+        int[] data = new int[3];
+        data[0] = ((ToolWithProjectile)tools[0]).GetAmmoCount();
+        data[1] = 0;
+        data[2] = ((ToolWithProjectile)tools[2]).GetAmmoCount();
+
+        return data;
+    }
+    public void LoadAmmoData(int[] _ammoData)
+    {
+        ((ToolWithProjectile)tools[0]).SetAmmoCount(_ammoData[0]);
+        //
+        ((ToolWithProjectile)tools[2]).SetAmmoCount(_ammoData[2]);
+    }
+
 
     // Start is called before the first frame update
     void Start()

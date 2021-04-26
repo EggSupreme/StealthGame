@@ -5,15 +5,11 @@ using UnityEngine;
 [System.Serializable]
 public class ToolData
 {
-    public int rockAmmo;
-    public int dartAmmo;
-    public int bowAmmo;
+    public int[] ammoArray;
 
     public ToolData(Tools_Abilities toolbelt)
     {
-        rockAmmo = 1;
-        dartAmmo = 1;
-        bowAmmo = 1;
+        ammoArray = toolbelt.GetAmmoData();
     
     }
 

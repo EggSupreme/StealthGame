@@ -96,5 +96,25 @@ public class FPSController : MonoBehaviour
             transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
         }
     }
+
+    public void SavePlayer()
+    {
+        SaveSystem.SavePlayer(this);
+    }
+
+    public void LoadPlayer()
+    {
+        LocationData data1 = SaveSystem.LoadPlayer();
+
+        Vector3 positionData;
+
+        positionData.x = data1.position[0];
+        positionData.y = data1.position[1];
+        positionData.z = data1.position[2];
+        
+        this.transform.position = positionData;
+
+    }
+
 }
 
